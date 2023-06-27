@@ -26,8 +26,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/go-pdf/fpdf"
 	"golang.org/x/image/tiff"
+
+	fpdf "github.com/geomyidia/pdf"
 )
 
 // RegisterReader registers a TIFF image, adding it to the PDF file but not

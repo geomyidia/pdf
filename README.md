@@ -1,37 +1,39 @@
 # GoFPDF document generator
 
-[![GitHub release](https://img.shields.io/github/release/go-pdf/fpdf.svg)](https://github.com/go-pdf/fpdf/releases)
-[![CI](https://github.com/go-pdf/fpdf/workflows/CI/badge.svg)](https://github.com/go-pdf/fpdf/actions)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/go-pdf/fpdf/master/LICENSE)
-[![Report](https://goreportcard.com/badge/github.com/go-pdf/fpdf)](https://goreportcard.com/report/github.com/go-pdf/fpdf)
-[![GoDoc](https://img.shields.io/badge/godoc-GoFPDF-blue.svg)](https://godoc.org/github.com/go-pdf/fpdf)
+[![GitHub release](https://img.shields.io/github/release/geomyidia/pdf.svg)](https://github.com/geomyidia/pdf/releases)
+[![CI](https://github.com/geomyidia/pdf/workflows/CI/badge.svg)](https://github.com/geomyidia/pdf/actions)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/geomyidia/pdf/master/LICENSE)
+[![Report](https://goreportcard.com/badge/github.com/geomyidia/pdf)](https://goreportcard.com/report/github.com/geomyidia/pdf)
+[![GoDoc](https://img.shields.io/badge/godoc-GoFPDF-blue.svg)](https://godoc.org/github.com/geomyidia/pdf)
 
-![](https://github.com/go-pdf/fpdf/raw/master/image/logo_gofpdf.jpg)
+![](https://github.com/geomyidia/pdf/raw/master/image/logo_gofpdf.jpg)
 
-Package `go-pdf/fpdf` implements a PDF document generator with high level
-support for text, drawing and images.
+Package `geomyidia/pdf` implements a PDF document generator with high level
+support for text, drawing and images. It differs from its parent fork in that
+it unifies color for all public functions and methods, no longer using
+separate integers, but an `RGB` or `RGBA` type.
 
 ## Features
 
-  - UTF-8 support
-  - Choice of measurement unit, page format and margins
-  - Page header and footer management
-  - Automatic page breaks, line breaks, and text justification
-  - Inclusion of JPEG, PNG, GIF, TIFF and basic path-only SVG images
-  - Colors, gradients and alpha channel transparency
-  - Outline bookmarks
-  - Internal and external links
-  - TrueType, Type1 and encoding support
-  - Page compression
-  - Lines, Bézier curves, arcs, and ellipses
-  - Rotation, scaling, skewing, translation, and mirroring
-  - Clipping
-  - Document protection
-  - Layers
-  - Templates
-  - Barcodes
-  - Charting facility
-  - Import PDFs as templates
+- UTF-8 support
+- Choice of measurement unit, page format and margins
+- Page header and footer management
+- Automatic page breaks, line breaks, and text justification
+- Inclusion of JPEG, PNG, GIF, TIFF and basic path-only SVG images
+- Colors, gradients and alpha channel transparency
+- Outline bookmarks
+- Internal and external links
+- TrueType, Type1 and encoding support
+- Page compression
+- Lines, Bézier curves, arcs, and ellipses
+- Rotation, scaling, skewing, translation, and mirroring
+- Clipping
+- Document protection
+- Layers
+- Templates
+- Barcodes
+- Charting facility
+- Import PDFs as templates
 
 gofpdf has no dependencies other than the Go standard library. All tests
 pass on Linux, Mac and Windows platforms.
@@ -51,13 +53,13 @@ page encodings for languages that have fewer than 256 glyphs.
 To install the package on your system, run
 
 ``` shell
-go get github.com/go-pdf/fpdf
+go get github.com/geomyidia/pdf
 ```
 
 Later, to receive updates, run
 
 ``` shell
-go get -u -v github.com/go-pdf/fpdf/...
+go get -u -v github.com/geomyidia/pdf/...
 ```
 
 ## Quick Start
@@ -73,7 +75,7 @@ err := pdf.OutputFileAndClose("hello.pdf")
 ```
 
 See the functions in the
-[fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+[fpdf\_test.go](https://github.com/geomyidia/pdf/blob/master/fpdf_test.go)
 file (shown as examples in this documentation) for more advanced PDF
 examples.
 
@@ -121,7 +123,7 @@ the tests complete.
 
 Please note that these examples run in the context of a test. In order
 run an example as a standalone application, you’ll need to examine
-[fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+[fpdf\_test.go](https://github.com/geomyidia/pdf/blob/master/fpdf_test.go)
 for some helper routines, for example `exampleFilename()` and
 `summary()`.
 
@@ -175,36 +177,36 @@ Fonts](http://dejavu-fonts.org/).
 
 The [draw2d](https://github.com/llgcode/draw2d) package is a two
 dimensional vector graphics library that can generate output in
-different forms. It uses `go-pdf/fpdf` for its document production mode.
+different forms. It uses `geomyidia/pdf` for its document production mode.
 
 ## Contributing Changes
 
-`go-pdf/fpdf` is a global community effort and you are invited to make it even
+`geomyidia/pdf` is a global community effort and you are invited to make it even
 better. If you have implemented a new feature or corrected a problem,
 please consider contributing your change to the project. A contribution
-that does not directly pertain to the core functionality of `go-pdf/fpdf`
+that does not directly pertain to the core functionality of `geomyidia/pdf`
 should be placed in its own directory directly beneath the `contrib`
 directory.
 
 Here are guidelines for making submissions. Your change should
 
-  - be compatible with the MIT License
-  - be properly documented
-  - be formatted with `go fmt`
-  - include an example in
-    [fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+- be compatible with the MIT License
+- be properly documented
+- be formatted with `go fmt`
+- include an example in
+    [fpdf\_test.go](https://github.com/geomyidia/pdf/blob/master/fpdf_test.go)
     if appropriate
-  - conform to the standards of [golint](https://github.com/golang/lint)
+- conform to the standards of [golint](https://github.com/golang/lint)
     and [go vet](https://golang.org/cmd/vet/), that is, `golint .` and
     `go vet .` should not generate any warnings
-  - not diminish [test coverage](https://blog.golang.org/cover)
+- not diminish [test coverage](https://blog.golang.org/cover)
 
 [Pull requests](https://help.github.com/articles/using-pull-requests/)
 are the preferred means of accepting your changes.
 
 ## License
 
-`go-pdf/fpdf` is released under the MIT License. It is copyrighted by Kurt Jung and the contributors acknowledged below.
+`geomyidia/pdf` is released under the MIT License. It is copyrighted by Kurt Jung and the contributors acknowledged below.
 
 ## Acknowledgments
 
@@ -257,5 +259,5 @@ times, and for file attachments and annotations.
 
 ## Roadmap
 
-  - Remove all legacy code page font support; use UTF-8 exclusively
-  - Improve test coverage as reported by the coverage tool.
+- Remove all legacy code page font support; use UTF-8 exclusively
+- Improve test coverage as reported by the coverage tool.

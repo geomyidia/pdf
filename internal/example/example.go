@@ -24,7 +24,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-pdf/fpdf"
+	fpdf "github.com/geomyidia/pdf"
 )
 
 var gofpdfDir string

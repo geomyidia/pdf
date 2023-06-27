@@ -1,9 +1,9 @@
 package tiff_test
 
 import (
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/contrib/tiff"
-	"github.com/go-pdf/fpdf/internal/example"
+	fpdf "github.com/geomyidia/pdf"
+	"github.com/geomyidia/pdf/contrib/tiff"
+	"github.com/geomyidia/pdf/internal/example"
 )
 
 // ExampleRegisterFile demonstrates the loading and display of a TIFF image.

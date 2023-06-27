@@ -4,7 +4,7 @@ import (
 	"io"
 	"net/http"
 
-	gofpdf "github.com/go-pdf/fpdf"
+	gofpdf "github.com/geomyidia/pdf"
 )
 
 // httpimgPdf is a partial interface that only implements the functions we need

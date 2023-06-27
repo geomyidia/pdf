@@ -11,7 +11,7 @@ on:
 env:
   GOPROXY: "https://proxy.golang.org"
   TAGS: "-tags=ci"
-  COVERAGE: "-coverpkg=github.com/go-pdf/fpdf/..."
+  COVERAGE: "-coverpkg=github.com/geomyidia/pdf/..."
 
 jobs:
 
@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: ${{ matrix.go-version }}
- 
+
     - name: Cache-Go
       uses: actions/cache@v3
       with:
@@ -40,7 +40,7 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
- 
+
     - name: Checkout code
       uses: actions/checkout@v3
       with:
@@ -53,7 +53,7 @@ jobs:
     - name: Build-Linux-64b
       if: matrix.platform == 'ubuntu-latest'
       run: |
-        GOARCH=amd64 go install -v $TAGS ./...       
+        GOARCH=amd64 go install -v $TAGS ./...
     - name: Build-Windows
       if: matrix.platform == 'windows-latest'
       run: |

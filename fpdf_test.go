@@ -24,8 +24,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/internal/example"
+	fpdf "github.com/geomyidia/pdf"
+	"github.com/geomyidia/pdf/internal/example"
 )
 
 func init() {

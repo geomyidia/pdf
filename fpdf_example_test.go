@@ -32,9 +32,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/internal/example"
-	"github.com/go-pdf/fpdf/internal/files"
+	fpdf "github.com/geomyidia/pdf"
+	"github.com/geomyidia/pdf/internal/example"
+	"github.com/geomyidia/pdf/internal/files"
 )
 
 func loremList() []string {
@@ -1359,7 +1359,7 @@ func ExampleFpdf_CellFormat_align() {
 				pdf.CellFormat(170, 257, rec.txt, borderStr, 0, rec.align, false, 0, linkStr)
 				borderStr = ""
 			}
-			linkStr = "https://github.com/go-pdf/fpdf"
+			linkStr = "https://github.com/geomyidia/pdf"
 		}
 	}
 	pdf := fpdf.New("P", "mm", "A4", "") // A4 210.0 x 297.0
@@ -1393,7 +1393,7 @@ func ExampleFpdf_CellFormat_codepageescape() {
 		pdf.Ln(ht)
 	}
 	pdf.AddPage()
-	htmlStr := `Until go-pdf/fpdf supports UTF-8 encoded source text, source text needs ` +
+	htmlStr := `Until geomyidia/pdf supports UTF-8 encoded source text, source text needs ` +
 		`to be specified with all special characters escaped to match the code page ` +
 		`layout of the currently selected font. By default, gofdpf uses code page 1252.` +
 		` See <a href="http://en.wikipedia.org/wiki/Windows-1252">Wikipedia</a> for ` +
@@ -1429,7 +1429,7 @@ func ExampleFpdf_CellFormat_codepage() {
 		pdf.Ln(ht)
 	}
 	pdf.AddPage()
-	str := `Go-pdf/fpdf provides a translator that will convert any UTF-8 code point ` +
+	str := `geomyidia/pdf provides a translator that will convert any UTF-8 code point ` +
 		`that is present in the specified code page.`
 	pdf.MultiCell(190, ht, str, "", "L", false)
 	pdf.Ln(2 * ht)
@@ -1567,7 +1567,7 @@ func ExampleFpdf_RegisterImageReader() {
 		wd       = 210
 		ht       = 297
 		fontSize = 15
-		urlStr   = "https://github.com/go-pdf/fpdf/raw/main/image/gofpdf.png"
+		urlStr   = "https://github.com/geomyidia/pdf/raw/main/image/gofpdf.png"
 		msgStr   = `Images from the web can be easily embedded when a PDF document is generated.`
 	)
 

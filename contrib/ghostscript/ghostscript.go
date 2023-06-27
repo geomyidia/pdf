@@ -9,7 +9,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/go-pdf/fpdf"
+	fpdf "github.com/geomyidia/pdf"
 )
 
 func report(fileStr string, err error) {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-pdf/fpdf"
+	fpdf "github.com/geomyidia/pdf"
 )
 
 func errPrintf(fmtStr string, args ...interface{}) {

@@ -1,4 +1,4 @@
-module github.com/go-pdf/fpdf
+module github.com/geomyidia/pdf
 
 go 1.19
 
