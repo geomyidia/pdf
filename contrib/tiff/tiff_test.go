@@ -10,7 +10,7 @@ import (
 func ExampleRegisterFile() {
 	pdf := fpdf.New("L", "mm", "A4", "")
 	pdf.SetFont("Helvetica", "", 12)
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{R: 200, G: 200, B: 220})
 	pdf.AddPageFormat("L", fpdf.SizeType{Wd: 200, Ht: 200})
 	opt := fpdf.ImageOptions{ImageType: "tiff", ReadDpi: false}
 	_ = tiff.RegisterFile(pdf, "sample", opt, "../../image/golang-gopher.tiff")

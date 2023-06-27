@@ -13,7 +13,7 @@ import (
 func createPdf() (pdf *fpdf.Fpdf) {
 	pdf = fpdf.New("L", "mm", "A4", "")
 	pdf.SetFont("Helvetica", "", 12)
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{R: 200, G: 200, B: 220})
 	pdf.AddPage()
 	return
 }
@@ -190,7 +190,7 @@ func TestGetUnscaledBarcodeDimensions(t *testing.T) {
 	barcode.BarcodeUnscalable(pdf, key, 15, 15, nil, nil, false)
 	w, h := barcode.GetUnscaledBarcodeDimensions(pdf, key)
 
-	pdf.SetDrawColor(255, 0, 0)
+	pdf.SetDrawColor(fpdf.RGB{R: 255, G: 0, B: 0})
 	pdf.Line(15, 15, 15+w, 15+h)
 
 	fileStr := example.Filename("contrib_barcode_GetBarcodeDimensions")
@@ -204,14 +204,14 @@ func TestGetUnscaledBarcodeDimensions(t *testing.T) {
 func TestBarcodeNonIntegerScalingFactors(t *testing.T) {
 	pdf := fpdf.New("L", "in", "A4", "")
 	pdf.SetFont("Helvetica", "", 12)
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{R: 200, G: 200, B: 220})
 	pdf.AddPage()
 
 	key := barcode.RegisterQR(pdf, "qrcode", qr.H, qr.Unicode)
 	var scale float64 = 1.5
 	barcode.BarcodeUnscalable(pdf, key, 0.5, 0.5, &scale, &scale, false)
 
-	pdf.SetDrawColor(255, 0, 0)
+	pdf.SetDrawColor(fpdf.RGB{R: 255, G: 0, B: 0})
 	pdf.Line(0.5, 0.5, 0.5+scale, 0.5+scale)
 
 	fileStr := example.Filename("contrib_barcode_BarcodeScaling")

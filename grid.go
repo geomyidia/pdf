@@ -5,22 +5,10 @@ import (
 	"strconv"
 )
 
-// RGBType holds fields for red, green and blue color components (0..255)
-type RGBType struct {
-	R, G, B int
-}
-
-// RGBAType holds fields for red, green and blue color components (0..255) and
-// an alpha transparency value (0..1)
-type RGBAType struct {
-	R, G, B int
-	Alpha   float64
-}
-
 // StateType holds various commonly used drawing values for convenient
 // retrieval (StateGet()) and restore (Put) methods.
 type StateType struct {
-	clrDraw, clrText, clrFill RGBType
+	clrDraw, clrText, clrFill RGB
 	lineWd                    float64
 	fontSize                  float64
 	alpha                     float64
@@ -30,9 +18,9 @@ type StateType struct {
 
 // StateGet returns a variable that contains common state values.
 func StateGet(pdf *Fpdf) (st StateType) {
-	st.clrDraw.R, st.clrDraw.G, st.clrDraw.B = pdf.GetDrawColor()
-	st.clrFill.R, st.clrFill.G, st.clrFill.B = pdf.GetFillColor()
-	st.clrText.R, st.clrText.G, st.clrText.B = pdf.GetTextColor()
+	st.clrDraw = pdf.GetDrawColor()
+	st.clrFill = pdf.GetFillColor()
+	st.clrText = pdf.GetTextColor()
 	st.lineWd = pdf.GetLineWidth()
 	_, st.fontSize = pdf.GetFontSize()
 	st.alpha, st.blendStr = pdf.GetAlpha()
@@ -43,9 +31,9 @@ func StateGet(pdf *Fpdf) (st StateType) {
 // Put sets the common state values contained in the state structure
 // specified by st.
 func (st StateType) Put(pdf *Fpdf) {
-	pdf.SetDrawColor(st.clrDraw.R, st.clrDraw.G, st.clrDraw.B)
-	pdf.SetFillColor(st.clrFill.R, st.clrFill.G, st.clrFill.B)
-	pdf.SetTextColor(st.clrText.R, st.clrText.G, st.clrText.B)
+	pdf.SetDrawColor(st.clrDraw)
+	pdf.SetFillColor(st.clrFill)
+	pdf.SetTextColor(st.clrText)
 	pdf.SetLineWidth(st.lineWd)
 	pdf.SetFontUnitSize(st.fontSize)
 	pdf.SetAlpha(st.alpha, st.blendStr)
@@ -82,7 +70,7 @@ type GridType struct {
 	// Formatting precision
 	xPrecision, yPrecision int
 	// Line and label colors
-	ClrText, ClrMain, ClrSub RGBAType
+	ClrText, ClrMain, ClrSub RGBA
 	// Line thickness
 	WdMain, WdSub float64
 	// Label height in points
@@ -137,9 +125,9 @@ func NewGrid(x, y, w, h float64) (grid GridType) {
 	grid.XLabelRotate = false
 	grid.XDiv = 10
 	grid.YDiv = 10
-	grid.ClrText = RGBAType{R: 0, G: 0, B: 0, Alpha: 1}
-	grid.ClrMain = RGBAType{R: 128, G: 160, B: 128, Alpha: 1}
-	grid.ClrSub = RGBAType{R: 192, G: 224, B: 192, Alpha: 1}
+	grid.ClrText = RGBA{RGB{R: 0, G: 0, B: 0}, 1}
+	grid.ClrMain = RGBA{RGB{R: 128, G: 160, B: 128}, 1}
+	grid.ClrSub = RGBA{RGB{R: 192, G: 224, B: 192}, 1}
 	grid.WdMain = 0.1
 	grid.WdSub = 0.1
 	grid.YTickStr = defaultFormatter
@@ -283,10 +271,10 @@ func (g *GridType) TickmarksExtentY(min, div float64, count int) {
 // 	g.ym, g.yb = linear(dataTp, paperTp, dataBt, paperBt)
 // }
 
-func lineAttr(pdf *Fpdf, clr RGBAType, lineWd float64) {
+func lineAttr(pdf *Fpdf, clr RGBA, lineWd float64) {
 	pdf.SetLineWidth(lineWd)
-	pdf.SetAlpha(clr.Alpha, "Normal")
-	pdf.SetDrawColor(clr.R, clr.G, clr.B)
+	pdf.SetAlpha(clr.Alpha(), "Normal")
+	pdf.SetDrawColor(clr.Color())
 }
 
 // Grid generates a graph-paperlike set of grid lines on the current page.
@@ -318,7 +306,7 @@ func (g GridType) Grid(pdf *Fpdf) {
 		pdf.SetAutoPageBreak(false, 0)
 		pdf.SetFontUnitSize(textSz)
 		strOfs = pdf.GetStringWidth("0")
-		pdf.SetFillColor(255, 255, 255)
+		pdf.SetFillColor(RGB{255, 255, 255})
 		pdf.SetCellMargin(0)
 
 		xMin = g.xTicks[0]

@@ -419,9 +419,9 @@ type Pdf interface {
 	GetAutoPageBreak() (auto bool, margin float64)
 	GetCellMargin() float64
 	GetConversionRatio() float64
-	GetDrawColor() (int, int, int)
+	GetDrawColor() RGB
 	GetDrawSpotColor() (name string, c, m, y, k byte)
-	GetFillColor() (int, int, int)
+	GetFillColor() RGB
 	GetFillSpotColor() (name string, c, m, y, k byte)
 	GetFontDesc(familyStr, styleStr string) FontDescType
 	GetFontSize() (ptSize, unitSize float64)
@@ -431,7 +431,7 @@ type Pdf interface {
 	GetPageSizeStr(sizeStr string) (size SizeType)
 	GetPageSize() (width, height float64)
 	GetStringWidth(s string) float64
-	GetTextColor() (int, int, int)
+	GetTextColor() RGB
 	GetTextSpotColor() (name string, c, m, y, k byte)
 	GetX() float64
 	GetXY() (float64, float64)
@@ -440,7 +440,7 @@ type Pdf interface {
 	Image(imageNameStr string, x, y, w, h float64, flow bool, tp string, link int, linkStr string)
 	ImageOptions(imageNameStr string, x, y, w, h float64, flow bool, options ImageOptions, link int, linkStr string)
 	ImageTypeFromMime(mimeStr string) (tp string)
-	LinearGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2 float64)
+	LinearGradient(x, y, w, h float64, c1, c2 RGB, x1, y1, x2, y2 float64)
 	LineTo(x, y float64)
 	Line(x1, y1, x2, y2 float64)
 	LinkString(x, y, w, h float64, linkStr string)
@@ -459,7 +459,7 @@ type Pdf interface {
 	PointConvert(pt float64) (u float64)
 	PointToUnitConvert(pt float64) (u float64)
 	Polygon(points []PointType, styleStr string)
-	RadialGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2, r float64)
+	RadialGradient(x, y, w, h float64, c1, c2 RGB, x1, y1, x2, y2, r float64)
 	RawWriteBuf(r io.Reader)
 	RawWriteStr(str string)
 	Rect(x, y, w, h float64, styleStr string)
@@ -480,11 +480,11 @@ type Pdf interface {
 	SetDashPattern(dashArray []float64, dashPhase float64)
 	SetDisplayMode(zoomStr, layoutStr string)
 	SetLang(lang string)
-	SetDrawColor(r, g, b int)
+	SetDrawColor(color RGB)
 	SetDrawSpotColor(nameStr string, tint byte)
 	SetError(err error)
 	SetErrorf(fmtStr string, args ...interface{})
-	SetFillColor(r, g, b int)
+	SetFillColor(color RGB)
 	SetFillSpotColor(nameStr string, tint byte)
 	SetFont(familyStr, styleStr string, size float64)
 	SetFontLoader(loader FontLoader)
@@ -511,7 +511,7 @@ type Pdf interface {
 	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
 	SetRightMargin(margin float64)
 	SetSubject(subjectStr string, isUTF8 bool)
-	SetTextColor(r, g, b int)
+	SetTextColor(color RGB)
 	SetTextSpotColor(nameStr string, tint byte)
 	SetTitle(titleStr string, isUTF8 bool)
 	SetTopMargin(margin float64)

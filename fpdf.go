@@ -909,8 +909,8 @@ func (f *Fpdf) rgbColorValue(r, g, b int, grayStr, fullStr string) (clr colorTyp
 // rectangles and cell borders). It is expressed in RGB components (0 - 255).
 // The method can be called before the first page is created. The value is
 // retained from page to page.
-func (f *Fpdf) SetDrawColor(r, g, b int) {
-	f.setDrawColor(r, g, b)
+func (f *Fpdf) SetDrawColor(c RGB) {
+	f.setDrawColor(c.R, c.G, c.B)
 }
 
 func (f *Fpdf) setDrawColor(r, g, b int) {
@@ -923,16 +923,16 @@ func (f *Fpdf) setDrawColor(r, g, b int) {
 // GetDrawColor returns the most recently set draw color as RGB components (0 -
 // 255). This will not be the current value if a draw color of some other type
 // (for example, spot) has been more recently set.
-func (f *Fpdf) GetDrawColor() (int, int, int) {
-	return f.color.draw.ir, f.color.draw.ig, f.color.draw.ib
+func (f *Fpdf) GetDrawColor() RGB {
+	return RGB{f.color.draw.ir, f.color.draw.ig, f.color.draw.ib}
 }
 
 // SetFillColor defines the color used for all filling operations (filled
 // rectangles and cell backgrounds). It is expressed in RGB components (0
 // -255). The method can be called before the first page is created and the
 // value is retained from page to page.
-func (f *Fpdf) SetFillColor(r, g, b int) {
-	f.setFillColor(r, g, b)
+func (f *Fpdf) SetFillColor(c RGB) {
+	f.setFillColor(c.R, c.G, c.B)
 }
 
 func (f *Fpdf) setFillColor(r, g, b int) {
@@ -946,15 +946,15 @@ func (f *Fpdf) setFillColor(r, g, b int) {
 // GetFillColor returns the most recently set fill color as RGB components (0 -
 // 255). This will not be the current value if a fill color of some other type
 // (for example, spot) has been more recently set.
-func (f *Fpdf) GetFillColor() (int, int, int) {
-	return f.color.fill.ir, f.color.fill.ig, f.color.fill.ib
+func (f *Fpdf) GetFillColor() RGB {
+	return RGB{f.color.fill.ir, f.color.fill.ig, f.color.fill.ib}
 }
 
 // SetTextColor defines the color used for text. It is expressed in RGB
 // components (0 - 255). The method can be called before the first page is
 // created. The value is retained from page to page.
-func (f *Fpdf) SetTextColor(r, g, b int) {
-	f.setTextColor(r, g, b)
+func (f *Fpdf) SetTextColor(c RGB) {
+	f.setTextColor(c.R, c.G, c.B)
 }
 
 func (f *Fpdf) setTextColor(r, g, b int) {
@@ -965,8 +965,8 @@ func (f *Fpdf) setTextColor(r, g, b int) {
 // GetTextColor returns the most recently set text color as RGB components (0 -
 // 255). This will not be the current value if a text color of some other type
 // (for example, spot) has been more recently set.
-func (f *Fpdf) GetTextColor() (int, int, int) {
-	return f.color.text.ir, f.color.text.ig, f.color.text.ib
+func (f *Fpdf) GetTextColor() RGB {
+	return RGB{f.color.text.ir, f.color.text.ig, f.color.text.ib}
 }
 
 // GetStringWidth returns the length of a string in user units. A font must be
@@ -1526,9 +1526,9 @@ func (f *Fpdf) gradient(tp, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2, r float6
 // anchored on the rectangle edge. Color 1 is used up to the origin of the
 // vector and color 2 is used beyond the vector's end point. Between the points
 // the colors are gradually blended.
-func (f *Fpdf) LinearGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2 float64) {
+func (f *Fpdf) LinearGradient(x, y, w, h float64, c1, c2 RGB, x1, y1, x2, y2 float64) {
 	f.gradientClipStart(x, y, w, h)
-	f.gradient(2, r1, g1, b1, r2, g2, b2, x1, y1, x2, y2, 0)
+	f.gradient(2, c1.R, c1.G, c1.B, c2.R, c2.G, c2.B, x1, y1, x2, y2, 0)
 	f.gradientClipEnd()
 }
 
@@ -1550,9 +1550,9 @@ func (f *Fpdf) LinearGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1
 // the circle to avoid rendering problems.
 //
 // The LinearGradient() example demonstrates this method.
-func (f *Fpdf) RadialGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2, r float64) {
+func (f *Fpdf) RadialGradient(x, y, w, h float64, c1, c2 RGB, x1, y1, x2, y2, r float64) {
 	f.gradientClipStart(x, y, w, h)
-	f.gradient(3, r1, g1, b1, r2, g2, b2, x1, y1, x2, y2, r)
+	f.gradient(3, c1.R, c1.G, c1.B, c2.R, c2.G, c2.B, x1, y1, x2, y2, r)
 	f.gradientClipEnd()
 }
 

@@ -97,7 +97,7 @@ func HTMLBasicTokenize(htmlStr string) (list []HTMLBasicSegmentType) {
 type HTMLBasicType struct {
 	pdf  *Fpdf
 	Link struct {
-		ClrR, ClrG, ClrB         int
+		Color                    RGB
 		Bold, Italic, Underscore bool
 	}
 }
@@ -106,7 +106,7 @@ type HTMLBasicType struct {
 // specified PDF file.
 func (f *Fpdf) HTMLBasicNew() (html HTMLBasicType) {
 	html.pdf = f
-	html.Link.ClrR, html.Link.ClrG, html.Link.ClrB = 0, 0, 128
+	html.Link.Color = RGB{0, 0, 128}
 	html.Link.Bold, html.Link.Italic, html.Link.Underscore = false, false, true
 	return
 }
@@ -122,7 +122,7 @@ func (f *Fpdf) HTMLBasicNew() (html HTMLBasicType) {
 // lineHt indicates the line height in the unit of measure specified in New().
 func (html *HTMLBasicType) Write(lineHt float64, htmlStr string) {
 	var boldLvl, italicLvl, underscoreLvl, linkBold, linkItalic, linkUnderscore int
-	var textR, textG, textB = html.pdf.GetTextColor()
+	var textColor = html.pdf.GetTextColor()
 	var hrefStr string
 	if html.Link.Bold {
 		linkBold = 1
@@ -151,11 +151,11 @@ func (html *HTMLBasicType) Write(lineHt float64, htmlStr string) {
 	}
 	putLink := func(urlStr, txtStr string) {
 		// Put a hyperlink
-		html.pdf.SetTextColor(html.Link.ClrR, html.Link.ClrG, html.Link.ClrB)
+		html.pdf.SetTextColor(html.Link.Color)
 		setStyle(linkBold, linkItalic, linkUnderscore)
 		html.pdf.WriteLinkString(lineHt, txtStr, urlStr)
 		setStyle(-linkBold, -linkItalic, -linkUnderscore)
-		html.pdf.SetTextColor(textR, textG, textB)
+		html.pdf.SetTextColor(textColor)
 	}
 	list := HTMLBasicTokenize(htmlStr)
 	var ok bool

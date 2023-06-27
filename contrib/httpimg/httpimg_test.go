@@ -9,7 +9,7 @@ import (
 func ExampleRegister() {
 	pdf := fpdf.New("L", "mm", "A4", "")
 	pdf.SetFont("Helvetica", "", 12)
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{R: 200, G: 200, B: 220})
 	pdf.AddPage()
 
 	url := "https://github.com/go-pdf/fpdf/raw/main/image/logo_gofpdf.jpg"

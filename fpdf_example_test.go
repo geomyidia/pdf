@@ -144,9 +144,9 @@ func ExampleFpdf_MultiCell() {
 		wd := pdf.GetStringWidth(titleStr) + 6
 		pdf.SetX((210 - wd) / 2)
 		// Colors of frame, background and text
-		pdf.SetDrawColor(0, 80, 180)
-		pdf.SetFillColor(230, 230, 0)
-		pdf.SetTextColor(220, 50, 50)
+		pdf.SetDrawColor(fpdf.RGB{0, 80, 180})
+		pdf.SetFillColor(fpdf.RGB{230, 230, 0})
+		pdf.SetTextColor(fpdf.RGB{220, 50, 50})
 		// Thickness of frame (1 mm)
 		pdf.SetLineWidth(1)
 		// Title
@@ -160,7 +160,7 @@ func ExampleFpdf_MultiCell() {
 		// Arial italic 8
 		pdf.SetFont("Arial", "I", 8)
 		// Text color in gray
-		pdf.SetTextColor(128, 128, 128)
+		pdf.SetTextColor(fpdf.RGB{128, 128, 128})
 		// Page number
 		pdf.CellFormat(0, 10, fmt.Sprintf("Page %d", pdf.PageNo()),
 			"", 0, "C", false, 0, "")
@@ -169,7 +169,7 @@ func ExampleFpdf_MultiCell() {
 		// 	// Arial 12
 		pdf.SetFont("Arial", "", 12)
 		// Background color
-		pdf.SetFillColor(200, 220, 255)
+		pdf.SetFillColor(fpdf.RGB{200, 220, 255})
 		// Title
 		pdf.CellFormat(0, 6, fmt.Sprintf("Chapter %d : %s", chapNum, titleStr),
 			"", 1, "L", true, 0, "")
@@ -227,7 +227,7 @@ func ExampleFpdf_SetLeftMargin() {
 		// Arial 12
 		pdf.SetFont("Arial", "", 12)
 		// Background color
-		pdf.SetFillColor(200, 220, 255)
+		pdf.SetFillColor(fpdf.RGB{200, 220, 255})
 		// Title
 		pdf.CellFormat(0, 6, fmt.Sprintf("Chapter %d : %s", chapNum, titleStr),
 			"", 1, "L", true, 0, "")
@@ -280,9 +280,9 @@ func ExampleFpdf_SetLeftMargin() {
 		wd := pdf.GetStringWidth(titleStr) + 6
 		pdf.SetX((210 - wd) / 2)
 		// Colors of frame, background and text
-		pdf.SetDrawColor(0, 80, 180)
-		pdf.SetFillColor(230, 230, 0)
-		pdf.SetTextColor(220, 50, 50)
+		pdf.SetDrawColor(fpdf.RGB{0, 80, 180})
+		pdf.SetFillColor(fpdf.RGB{230, 230, 0})
+		pdf.SetTextColor(fpdf.RGB{220, 50, 50})
 		// Thickness of frame (1 mm)
 		pdf.SetLineWidth(1)
 		// Title
@@ -298,7 +298,7 @@ func ExampleFpdf_SetLeftMargin() {
 		// Arial italic 8
 		pdf.SetFont("Arial", "I", 8)
 		// Text color in gray
-		pdf.SetTextColor(128, 128, 128)
+		pdf.SetTextColor(fpdf.RGB{128, 128, 128})
 		// Page number
 		pdf.CellFormat(0, 10, fmt.Sprintf("Page %d", pdf.PageNo()),
 			"", 0, "C", false, 0, "")
@@ -341,14 +341,14 @@ func ExampleFpdf_SplitLines_tables() {
 	pdf.AddPage()
 
 	// Headers
-	pdf.SetTextColor(224, 224, 224)
-	pdf.SetFillColor(64, 64, 64)
+	pdf.SetTextColor(fpdf.RGB{224, 224, 224})
+	pdf.SetFillColor(fpdf.RGB{64, 64, 64})
 	for colJ := 0; colJ < colCount; colJ++ {
 		pdf.CellFormat(colWd, 10, header[colJ], "1", 0, "CM", true, 0, "")
 	}
 	pdf.Ln(-1)
-	pdf.SetTextColor(24, 24, 24)
-	pdf.SetFillColor(255, 255, 255)
+	pdf.SetTextColor(fpdf.RGB{24, 24, 24})
+	pdf.SetFillColor(fpdf.RGB{255, 255, 255})
 
 	// Rows
 	y := pdf.GetY()
@@ -478,9 +478,9 @@ func ExampleFpdf_CellFormat_tables() {
 	// Colored table
 	fancyTable := func() {
 		// Colors, line width and bold font
-		pdf.SetFillColor(255, 0, 0)
-		pdf.SetTextColor(255, 255, 255)
-		pdf.SetDrawColor(128, 0, 0)
+		pdf.SetFillColor(fpdf.RGB{255, 0, 0})
+		pdf.SetTextColor(fpdf.RGB{255, 255, 255})
+		pdf.SetDrawColor(fpdf.RGB{128, 0, 0})
 		pdf.SetLineWidth(.3)
 		pdf.SetFont("", "B", 0)
 		// 	Header
@@ -496,8 +496,8 @@ func ExampleFpdf_CellFormat_tables() {
 		}
 		pdf.Ln(-1)
 		// Color and font restoration
-		pdf.SetFillColor(224, 235, 255)
-		pdf.SetTextColor(0, 0, 0)
+		pdf.SetFillColor(fpdf.RGB{224, 235, 255})
+		pdf.SetTextColor(fpdf.RGB{0, 0, 0})
 		pdf.SetFont("", "", 0)
 		// 	Data
 		fill := false
@@ -703,9 +703,9 @@ func ExampleFpdf_SetAcceptPageBreakFunc() {
 		pdf.SetFont("Helvetica", "B", 48)
 		wd := pdf.GetStringWidth(titleStr) + 6
 		pdf.SetX((pageWd - wd) / 2)
-		pdf.SetTextColor(128, 128, 160)
+		pdf.SetTextColor(fpdf.RGB{128, 128, 160})
 		pdf.Write(12, titleStr[:2])
-		pdf.SetTextColor(128, 128, 128)
+		pdf.SetTextColor(fpdf.RGB{128, 128, 128})
 		pdf.Write(12, titleStr[2:])
 		pdf.Ln(20)
 		y0 = pdf.GetY()
@@ -772,12 +772,12 @@ func ExampleFpdf_Circle() {
 	)
 	pdf := fpdf.New("", "", "", "")
 	pdf.SetFont("Helvetica", "", 12)
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{200, 200, 220})
 	pdf.AddPage()
 
 	y := 15.0
 	pdf.Text(10, y, "Circles")
-	pdf.SetFillColor(200, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{200, 200, 220})
 	pdf.SetLineWidth(thin)
 	pdf.Circle(20, y+15, 10, "D")
 	pdf.Circle(45, y+15, 10, "F")
@@ -788,7 +788,7 @@ func ExampleFpdf_Circle() {
 
 	y += 40.0
 	pdf.Text(10, y, "Ellipses")
-	pdf.SetFillColor(220, 200, 200)
+	pdf.SetFillColor(fpdf.RGB{220, 200, 200})
 	pdf.Ellipse(30, y+15, 20, 10, 0, "D")
 	pdf.Ellipse(75, y+15, 20, 10, 0, "F")
 	pdf.Ellipse(120, y+15, 20, 10, 0, "FD")
@@ -798,7 +798,7 @@ func ExampleFpdf_Circle() {
 
 	y += 40.0
 	pdf.Text(10, y, "Curves (quadratic)")
-	pdf.SetFillColor(220, 220, 200)
+	pdf.SetFillColor(fpdf.RGB{220, 220, 200})
 	pdf.Curve(10, y+30, 15, y-20, 40, y+30, "D")
 	pdf.Curve(45, y+30, 50, y-20, 75, y+30, "F")
 	pdf.Curve(80, y+30, 85, y-20, 110, y+30, "FD")
@@ -811,7 +811,7 @@ func ExampleFpdf_Circle() {
 
 	y += 40.0
 	pdf.Text(10, y, "Curves (cubic)")
-	pdf.SetFillColor(220, 200, 220)
+	pdf.SetFillColor(fpdf.RGB{220, 200, 220})
 	pdf.CurveBezierCubic(10, y+30, 15, y-20, 10, y+30, 40, y+30, "D")
 	pdf.CurveBezierCubic(45, y+30, 50, y-20, 45, y+30, 75, y+30, "F")
 	pdf.CurveBezierCubic(80, y+30, 85, y-20, 80, y+30, 110, y+30, "FD")
@@ -824,7 +824,7 @@ func ExampleFpdf_Circle() {
 
 	y += 40.0
 	pdf.Text(10, y, "Arcs")
-	pdf.SetFillColor(200, 220, 220)
+	pdf.SetFillColor(fpdf.RGB{200, 220, 220})
 	pdf.SetLineWidth(thick)
 	pdf.Arc(45, y+35, 20, 10, 0, 0, 180, "FD")
 	pdf.SetLineWidth(thin)
@@ -866,7 +866,7 @@ func ExampleFpdf_SetAlpha() {
 	pdf.AddPage()
 	pdf.SetFont("Helvetica", "", 18)
 	pdf.SetXY(0, gapY)
-	pdf.SetTextColor(0, 0, 0)
+	pdf.SetTextColor(fpdf.RGB{0, 0, 0})
 	pdf.CellFormat(pageW, gapY, "Alpha Blending Modes", "", 0, "C", false, 0, "")
 	j := 0
 	y := 3 * gapY
@@ -875,12 +875,12 @@ func ExampleFpdf_SetAlpha() {
 		for row := 0; row < 4; row++ {
 			pdf.Rect(x, y, rectW, rectH, "D")
 			pdf.SetFont("Helvetica", "B", 12)
-			pdf.SetFillColor(0, 0, 0)
-			pdf.SetTextColor(250, 250, 230)
+			pdf.SetFillColor(fpdf.RGB{0, 0, 0})
+			pdf.SetTextColor(fpdf.RGB{250, 250, 230})
 			pdf.SetXY(x, y+rectH-4)
 			pdf.CellFormat(rectW, 5, modeList[j], "", 0, "C", true, 0, "")
 			pdf.SetFont("Helvetica", "I", 150)
-			pdf.SetTextColor(80, 80, 120)
+			pdf.SetTextColor(fpdf.RGB{80, 80, 120})
 			pdf.SetXY(x, y+2)
 			pdf.CellFormat(rectW, rectH, "A", "", 0, "C", false, 0, "")
 			pdf.SetAlpha(0.5, modeList[j])
@@ -904,15 +904,15 @@ func ExampleFpdf_LinearGradient() {
 	pdf := fpdf.New("", "", "", "")
 	pdf.SetFont("Helvetica", "", 12)
 	pdf.AddPage()
-	pdf.LinearGradient(0, 0, 210, 100, 250, 250, 255, 220, 220, 225, 0, 0, 0, .5)
-	pdf.LinearGradient(20, 25, 75, 75, 220, 220, 250, 80, 80, 220, 0, .2, 0, .8)
+	pdf.LinearGradient(0, 0, 210, 100, fpdf.RGB{250, 250, 255}, fpdf.RGB{220, 220, 225}, 0, 0, 0, .5)
+	pdf.LinearGradient(20, 25, 75, 75, fpdf.RGB{220, 220, 250}, fpdf.RGB{80, 80, 220}, 0, .2, 0, .8)
 	pdf.Rect(20, 25, 75, 75, "D")
-	pdf.LinearGradient(115, 25, 75, 75, 220, 220, 250, 80, 80, 220, 0, 0, 1, 1)
+	pdf.LinearGradient(115, 25, 75, 75, fpdf.RGB{220, 220, 250}, fpdf.RGB{80, 80, 220}, 0, 0, 1, 1)
 	pdf.Rect(115, 25, 75, 75, "D")
-	pdf.RadialGradient(20, 120, 75, 75, 220, 220, 250, 80, 80, 220,
+	pdf.RadialGradient(20, 120, 75, 75, fpdf.RGB{220, 220, 250}, fpdf.RGB{80, 80, 220},
 		0.25, 0.75, 0.25, 0.75, 1)
 	pdf.Rect(20, 120, 75, 75, "D")
-	pdf.RadialGradient(115, 120, 75, 75, 220, 220, 250, 80, 80, 220,
+	pdf.RadialGradient(115, 120, 75, 75, fpdf.RGB{220, 220, 250}, fpdf.RGB{80, 80, 220},
 		0.25, 0.75, 0.75, 0.75, 0.75)
 	pdf.Rect(115, 120, 75, 75, "D")
 	fileStr := example.Filename("Fpdf_LinearGradient_gradient")
@@ -931,29 +931,29 @@ func ExampleFpdf_ClipText() {
 	pdf.SetFont("Helvetica", "", 24)
 	pdf.SetXY(0, y)
 	pdf.ClipText(10, y+12, "Clipping examples", false)
-	pdf.RadialGradient(10, y, 100, 20, 128, 128, 160, 32, 32, 48,
+	pdf.RadialGradient(10, y, 100, 20, fpdf.RGB{128, 128, 160}, fpdf.RGB{32, 32, 48},
 		0.25, 0.5, 0.25, 0.5, 0.2)
 	pdf.ClipEnd()
 
 	y += 12
 	pdf.SetFont("Helvetica", "B", 120)
-	pdf.SetDrawColor(64, 80, 80)
+	pdf.SetDrawColor(fpdf.RGB{64, 80, 80})
 	pdf.SetLineWidth(.5)
 	pdf.ClipText(10, y+40, pdf.String(), true)
-	pdf.RadialGradient(10, y, 200, 50, 220, 220, 250, 80, 80, 220,
+	pdf.RadialGradient(10, y, 200, 50, fpdf.RGB{220, 220, 250}, fpdf.RGB{80, 80, 220},
 		0.25, 0.5, 0.25, 0.5, 1)
 	pdf.ClipEnd()
 
 	y += 55
 	pdf.ClipRect(10, y, 105, 20, true)
-	pdf.SetFillColor(255, 255, 255)
+	pdf.SetFillColor(fpdf.RGB{255, 255, 255})
 	pdf.Rect(10, y, 105, 20, "F")
 	pdf.ClipCircle(40, y+10, 15, false)
-	pdf.RadialGradient(25, y, 30, 30, 220, 250, 220, 40, 60, 40, 0.3,
+	pdf.RadialGradient(25, y, 30, 30, fpdf.RGB{220, 250, 220}, fpdf.RGB{40, 60, 40}, 0.3,
 		0.85, 0.3, 0.85, 0.5)
 	pdf.ClipEnd()
 	pdf.ClipEllipse(80, y+10, 20, 15, false)
-	pdf.RadialGradient(60, y, 40, 30, 250, 220, 220, 60, 40, 40, 0.3,
+	pdf.RadialGradient(60, y, 40, 30, fpdf.RGB{250, 220, 220}, fpdf.RGB{60, 40, 40}, 0.3,
 		0.85, 0.3, 0.85, 0.5)
 	pdf.ClipEnd()
 	pdf.ClipEnd()
@@ -964,21 +964,21 @@ func ExampleFpdf_ClipText() {
 	pdf.ClipEnd()
 
 	pdf.ClipCircle(60, y+10, 10, true)
-	pdf.RadialGradient(50, y, 20, 20, 220, 220, 250, 40, 40, 60, 0.3,
+	pdf.RadialGradient(50, y, 20, 20, fpdf.RGB{220, 220, 250}, fpdf.RGB{40, 40, 60}, 0.3,
 		0.7, 0.3, 0.7, 0.5)
 	pdf.ClipEnd()
 
 	pdf.ClipPolygon([]fpdf.PointType{{X: 80, Y: y + 20}, {X: 90, Y: y},
 		{X: 100, Y: y + 20}}, true)
-	pdf.LinearGradient(80, y, 20, 20, 250, 220, 250, 60, 40, 60, 0.5,
+	pdf.LinearGradient(80, y, 20, 20, fpdf.RGB{250, 220, 250}, fpdf.RGB{60, 40, 60}, 0.5,
 		1, 0.5, 0.5)
 	pdf.ClipEnd()
 
 	y += 30
 	pdf.SetLineWidth(.1)
-	pdf.SetDrawColor(180, 180, 180)
+	pdf.SetDrawColor(fpdf.RGB{180, 180, 180})
 	pdf.ClipRoundedRect(10, y, 120, 20, 5, true)
-	pdf.RadialGradient(10, y, 120, 20, 255, 255, 255, 240, 240, 220,
+	pdf.RadialGradient(10, y, 120, 20, fpdf.RGB{255, 255, 255}, fpdf.RGB{240, 240, 220},
 		0.25, 0.75, 0.25, 0.75, 0.5)
 	pdf.SetXY(5, y-5)
 	pdf.SetFont("Times", "", 12)
@@ -986,9 +986,9 @@ func ExampleFpdf_ClipText() {
 	pdf.ClipEnd()
 
 	y += 30
-	pdf.SetDrawColor(180, 100, 180)
+	pdf.SetDrawColor(fpdf.RGB{180, 100, 180})
 	pdf.ClipRoundedRectExt(10, y, 120, 20, 5, 10, 5, 10, true)
-	pdf.RadialGradient(10, y, 120, 20, 255, 255, 255, 240, 240, 220,
+	pdf.RadialGradient(10, y, 120, 20, fpdf.RGB{255, 255, 255}, fpdf.RGB{240, 240, 220},
 		0.25, 0.75, 0.25, 0.75, 0.5)
 	pdf.SetXY(5, y-5)
 	pdf.SetFont("Times", "", 12)
@@ -1069,8 +1069,8 @@ func ExampleFpdf_TransformBegin() {
 	pdf := fpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
 	color := func(val int) {
-		pdf.SetDrawColor(val, val, val)
-		pdf.SetTextColor(val, val, val)
+		pdf.SetDrawColor(fpdf.RGB{val, val, val})
+		pdf.SetTextColor(fpdf.RGB{val, val, val})
 	}
 	reference := func(str string, x, y float64, val int) {
 		color(val)
@@ -1098,8 +1098,8 @@ func ExampleFpdf_TransformBegin() {
 	pdf.TransformMirrorVertical(10 + titleHt + 0.5)
 	pdf.ClipText(titleX, 10+titleHt, titleStr, false)
 	// Remember that the transform will mirror the gradient box too
-	pdf.LinearGradient(titleX, 10, titleWd, titleHt+4, 120, 120, 120,
-		255, 255, 255, 0, 0, 0, 0.6)
+	pdf.LinearGradient(titleX, 10, titleWd, titleHt+4, fpdf.RGB{120, 120, 120},
+		fpdf.RGB{255, 255, 255}, 0, 0, 0, 0.6)
 	pdf.ClipEnd()
 	pdf.TransformEnd()
 
@@ -1262,8 +1262,8 @@ func ExampleFpdf_SplitLines() {
 	lines := pdf.SplitLines([]byte(lorem()), wd)
 	ht := float64(len(lines)) * lineHt
 	y := (297.0 - ht) / 2.0
-	pdf.SetDrawColor(128, 128, 128)
-	pdf.SetFillColor(255, 255, 210)
+	pdf.SetDrawColor(fpdf.RGB{128, 128, 128})
+	pdf.SetFillColor(fpdf.RGB{255, 255, 210})
 	x := (210.0 - (wd + 40.0)) / 2.0
 	pdf.Rect(x, y-20.0, wd+40.0, ht+40.0, "FD")
 	pdf.SetY(y)
@@ -1312,7 +1312,7 @@ func ExampleFpdf_SVGBasicWrite() {
 		}
 		pdf.SetLineCapStyle("round")
 		pdf.SetLineWidth(0.25)
-		pdf.SetDrawColor(0, 0, 128)
+		pdf.SetDrawColor(fpdf.RGB{0, 0, 128})
 		pdf.SetXY((210.0-scale*sig.Wd)/2.0, pdf.GetY()+10)
 		pdf.SVGBasicWrite(&sig, scale)
 	} else {
@@ -1492,7 +1492,7 @@ func ExampleFpdf_Polygon() {
 	pdf := fpdf.New("P", "mm", "A4", "") // A4 210.0 x 297.0
 	pdf.AddPage()
 	pdf.SetFont("Helvetica", "", ptSize)
-	pdf.SetDrawColor(0, 80, 180)
+	pdf.SetDrawColor(fpdf.RGB{0, 80, 180})
 	gap = 12.0
 	pdf.SetY(gap)
 	pdf.CellFormat(190.0, gap, "Equilateral polygons", "", 1, "C", false, 0, "")
@@ -1501,7 +1501,7 @@ func ExampleFpdf_Polygon() {
 	y = 2*gap + pdf.PointConvert(ptSize) + radius
 	rgVal = 230
 	for row := 0; row < rowCount; row++ {
-		pdf.SetFillColor(rgVal, rgVal, 0)
+		pdf.SetFillColor(fpdf.RGB{rgVal, rgVal, 0})
 		rgVal -= 12
 		x = gap + radius
 		for col := 0; col < colCount; col++ {
@@ -1677,10 +1677,10 @@ func ExampleFpdf_Beziergon() {
 	}
 	pdf.MultiCell(wd-margin-margin, ln, msgStr, "", "C", false)
 	pdf.SetDashPattern([]float64{0.8, 0.8}, 0)
-	pdf.SetDrawColor(160, 160, 160)
+	pdf.SetDrawColor(fpdf.RGB{160, 160, 160})
 	pdf.Polygon(srcList, "D")
 	pdf.SetDashPattern([]float64{}, 0)
-	pdf.SetDrawColor(64, 64, 128)
+	pdf.SetDrawColor(fpdf.RGB{64, 64, 128})
 	pdf.SetLineWidth(pdf.GetLineWidth() * 3)
 	pdf.Beziergon(curveList, "D")
 	fileStr := example.Filename("Fpdf_Beziergon")
@@ -1722,7 +1722,7 @@ func ExampleFpdf_MoveTo() {
 	pdf.CurveTo(190, 100, 105, 100)
 	pdf.CurveBezierCubicTo(20, 100, 105, 200, 20, 200)
 	pdf.ClosePath()
-	pdf.SetFillColor(200, 200, 200)
+	pdf.SetFillColor(fpdf.RGB{200, 200, 200})
 	pdf.SetLineWidth(3)
 	pdf.DrawPath("DF")
 	fileStr := example.Filename("Fpdf_MoveTo_path")
@@ -1743,7 +1743,7 @@ func ExampleFpdf_SetLineJoinStyle() {
 		pdf.SetLineJoinStyle(join)
 
 		// Draw thick line
-		pdf.SetDrawColor(0x33, 0x33, 0x33)
+		pdf.SetDrawColor(fpdf.RGB{0x33, 0x33, 0x33})
 		pdf.SetLineWidth(30.0)
 		pdf.MoveTo(x0, y0)
 		pdf.LineTo((x0+x1)/2+offset, (y0+y1)/2)
@@ -1751,7 +1751,7 @@ func ExampleFpdf_SetLineJoinStyle() {
 		pdf.DrawPath("D")
 
 		// Draw thin helping line
-		pdf.SetDrawColor(0xFF, 0x33, 0x33)
+		pdf.SetDrawColor(fpdf.RGB{0xFF, 0x33, 0x33})
 		pdf.SetLineWidth(2.56)
 		pdf.MoveTo(x0, y0)
 		pdf.LineTo((x0+x1)/2+offset, (y0+y1)/2)
@@ -1776,8 +1776,8 @@ func ExampleFpdf_SetLineJoinStyle() {
 // ExampleFpdf_DrawPath demonstrates various fill modes.
 func ExampleFpdf_DrawPath() {
 	pdf := fpdf.New("P", "mm", "A4", "")
-	pdf.SetDrawColor(0xff, 0x00, 0x00)
-	pdf.SetFillColor(0x99, 0x99, 0x99)
+	pdf.SetDrawColor(fpdf.RGB{0xff, 0x00, 0x00})
+	pdf.SetFillColor(fpdf.RGB{0x99, 0x99, 0x99})
 	pdf.SetFont("Helvetica", "", 15)
 	pdf.AddPage()
 	pdf.SetAlpha(1, "Multiply")
@@ -1858,7 +1858,7 @@ func ExampleFpdf_CreateTemplate() {
 		tpl.Image(example.ImageFile("logo.png"), 6, 6, 30, 0, false, "", 0, "")
 		tpl.SetFont("Arial", "B", 16)
 		tpl.Text(40, 20, "Template says hello")
-		tpl.SetDrawColor(0, 100, 200)
+		tpl.SetDrawColor(fpdf.RGB{0, 100, 200})
 		tpl.SetLineWidth(2.5)
 		tpl.Line(95, 12, 105, 22)
 	})
@@ -1872,14 +1872,14 @@ func ExampleFpdf_CreateTemplate() {
 			tpl2.Image(example.ImageFile("logo.png"), 6, 86, 30, 0, false, "", 0, "")
 			tpl2.SetFont("Arial", "B", 16)
 			tpl2.Text(40, 100, "Subtemplate says hello")
-			tpl2.SetDrawColor(0, 200, 100)
+			tpl2.SetDrawColor(fpdf.RGB{0, 200, 100})
 			tpl2.SetLineWidth(2.5)
 			tpl2.Line(102, 92, 112, 102)
 		})
 		tpl.UseTemplate(subtemplate)
 	})
 
-	pdf.SetDrawColor(200, 100, 0)
+	pdf.SetDrawColor(fpdf.RGB{200, 100, 0})
 	pdf.SetLineWidth(2.5)
 	pdf.SetFont("Arial", "B", 16)
 
@@ -2137,7 +2137,7 @@ func ExampleNewGrid() {
 	for month, val := range pts {
 		dot(float64(month)+0.5, val)
 	}
-	pdf.SetDrawColor(255, 64, 64)
+	pdf.SetDrawColor(fpdf.RGB{255, 64, 64})
 	pdf.SetAlpha(0.5, "Normal")
 	pdf.SetLineWidth(1.2)
 	gr.Plot(pdf, 0.5, 11.5, 50, func(x float64) float64 {
@@ -2325,8 +2325,8 @@ func ExampleFpdf_SetFillColor() {
 		pdf.TransformTranslateY(trY)
 		pdf.SetLineJoinStyle("round")
 		pdf.SetLineWidth(0.5)
-		pdf.SetDrawColor(128, 64, 0)
-		pdf.SetFillColor(255, 127, 0)
+		pdf.SetDrawColor(fpdf.RGB{128, 64, 0})
+		pdf.SetFillColor(fpdf.RGB{255, 127, 0})
 		pdf.SetAlpha(0.5, "Normal")
 		pdf.SetDashPattern([]float64{5, 10}, 0)
 		pdf.Rect(0, 0, 40, 40, "FD")
@@ -2365,7 +2365,7 @@ func ExampleFpdf_TransformRotate() {
 
 	pdf.SetHeaderFunc(func() {
 		pdf.SetFont("Arial", "B", markFontHt)
-		pdf.SetTextColor(206, 216, 232)
+		pdf.SetTextColor(fpdf.RGB{206, 216, 232})
 		pdf.SetXY(margin, markY)
 		pdf.TransformBegin()
 		pdf.TransformRotate(45, ctrX, ctrY)
@@ -2510,7 +2510,7 @@ func ExampleFpdf_RoundedRect() {
 	for row := 0; row < 4; row++ {
 		x := hgap
 		for col := 0; col < 4; col++ {
-			pdf.SetFillColor(r, g, b)
+			pdf.SetFillColor(fpdf.RGB{r, g, b})
 			pdf.RoundedRect(x, y, wd, ht, radius, corner(row&1 == 1, row&2 == 2, col&1 == 1, col&2 == 2), "FD")
 			r += 8
 			g += 10
@@ -2586,8 +2586,8 @@ func ExampleFpdf_SetTextRenderingMode() {
 	fontSz = float64(125)
 	lineSz = pdf.PointToUnitConvert(fontSz)
 	pdf.SetFontSize(fontSz)
-	pdf.SetTextColor(170, 170, 190)
-	pdf.SetDrawColor(50, 60, 90)
+	pdf.SetTextColor(fpdf.RGB{170, 170, 190})
+	pdf.SetDrawColor(fpdf.RGB{50, 60, 90})
 
 	write := func(mode int) {
 		pdf.SetTextRenderingMode(mode)
